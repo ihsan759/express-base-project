@@ -1,0 +1,10 @@
+{
+	"name": "install-express",
+	"version": "1.0.0",
+	"type": "module",
+	"dependencies": {
+		"@inquirer/prompts": "^7.5.3",
+		"inquirer": "^12.6.3",
+		"nanospinner": "^1.2.2"
+	}
+}
