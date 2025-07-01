@@ -1,10 +1,29 @@
 {
-	"name": "install-express",
+	"name": "express-generator",
 	"version": "1.0.0",
 	"type": "module",
 	"dependencies": {
 		"@inquirer/prompts": "^7.5.3",
 		"inquirer": "^12.6.3",
 		"nanospinner": "^1.2.2"
-	}
+	},
+	"description": "Automatically generates a clean, ready-to-use Express base project",
+	"main": "install-express.js",
+	"devDependencies": {},
+	"scripts": {
+		"test": "npm install-express.js -t ./express"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ihsan759/express-generator.git"
+	},
+	"keywords": [
+		"express-generator"
+	],
+	"author": "Muhamad Ichsan Dwi Farhana (https://www.linkedin.com/in/muhamad-ichsan-dwi-farhana-4a74291a3/)",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/ihsan759/express-generator/issues"
+	},
+	"homepage": "https://github.com/ihsan759/express-generator#readme"
 }
