@@ -8,7 +8,7 @@ import path from 'path';
 export async function ensureTSConfig(directory) {
 	const tsConfigPath = path.join(directory, 'tsconfig.json');
 	if (!fs.existsSync(tsConfigPath)) {
-		console.log('📦 tsconfig.json tidak ditemukan. Membuat baru...');
+		console.log('📦 Couldn’t find tsconfig.json. Creating it now...');
 		fs.writeFileSync(
 			tsConfigPath,
 			JSON.stringify(
@@ -26,6 +26,6 @@ export async function ensureTSConfig(directory) {
 				2
 			)
 		);
-		console.log('✅ tsconfig.json berhasil dibuat.');
+		console.log('✅ tsconfig.json was created successfully.');
 	}
 }

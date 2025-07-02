@@ -41,7 +41,7 @@ async function main() {
 	let typescript = selectedLibs.includes('typescript');
 	if (!typescript) {
 		const confirm = await input({
-			message: `Apakah Anda ingin menginstall typescript? (y/n)`,
+			message: `Do you want to install TypeScript? (y/n)`,
 			default: 'y',
 		});
 		if (confirm.toLowerCase() == 'y') {

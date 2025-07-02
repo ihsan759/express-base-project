@@ -13,7 +13,7 @@ export function getClosestTypesVersion(name, mainVersion) {
 
 		const allVersions = JSON.parse(output);
 		if (!Array.isArray(allVersions) || allVersions.length === 0) {
-			console.warn(`⚠️  Tidak ada versi @types/${name} yang tersedia.`);
+			console.warn(`⚠️  No available version found for @types/${name}.`);
 			return null;
 		}
 
@@ -37,7 +37,7 @@ export function getClosestTypesVersion(name, mainVersion) {
 		// Jika tidak ada yang cocok, ambil versi terakhir
 		return allVersions[allVersions.length - 1];
 	} catch (e) {
-		console.error(`❌ Gagal mengambil versi @types/${name}:`, e.message);
+		console.error(`❌ Failed to retrieve @types/${name} version:`, e.message);
 		return null;
 	}
 }

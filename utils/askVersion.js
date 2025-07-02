@@ -12,7 +12,7 @@ export async function askVersion() {
 		{
 			type: 'checkbox',
 			name: 'selectedLibs',
-			message: '📦 Pilih library yang ingin dicustom versinya:',
+			message: '📦 Choose libraries to customize versions:',
 			choices: versionableLibs,
 		},
 	]);

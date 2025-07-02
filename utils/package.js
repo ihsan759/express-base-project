@@ -10,9 +10,9 @@ import { input } from '@inquirer/prompts';
 export async function ensurePackageJson(directory) {
 	const pkgPath = path.join(directory, 'package.json');
 	if (!fs.existsSync(pkgPath)) {
-		console.log('📦 package.json tidak ditemukan. Membuat baru...');
+		console.log('📦 Couldn’t find package.json. Creating it now...');
 		const nameproject = await input({
-			message: 'Masukkan nama project:',
+			message: 'Enter project name:',
 			default: 'express-project',
 		});
 		fs.writeFileSync(
@@ -28,6 +28,6 @@ export async function ensurePackageJson(directory) {
 				2
 			)
 		);
-		console.log('✅ package.json berhasil dibuat.');
+		console.log('✅ package.json was created successfully.');
 	}
 }

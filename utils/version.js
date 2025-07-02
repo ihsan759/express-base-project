@@ -9,7 +9,7 @@ import { createSpinner } from 'nanospinner';
  */
 export async function getAllVersions(library) {
 	const spinner = createSpinner(
-		`Mengambil versi ${library} dari npm...`
+		`Looking up ${library} versions on npm...`
 	).start();
 	let versions = [];
 
@@ -25,15 +25,15 @@ export async function getAllVersions(library) {
 			.slice(-20)
 			.reverse();
 
-		spinner.success({ text: 'Versi berhasil diambil.' });
+		spinner.success({ text: `Versions retrieved successfully.` });
 	} catch (err) {
-		spinner.error({ text: 'Gagal mengambil versi.' });
+		spinner.error({ text: `Failed to retrieve versions.` });
 		console.error(err.message);
 		process.exit(1);
 	}
 
 	return await select({
-		message: `Pilih versi ${library} yang ingin diinstall:`,
+		message: `Choose ${library} version to install:`,
 		choices: versions.map((v) => ({ name: v, value: v })),
 	});
 }

@@ -18,7 +18,7 @@ export async function libraryInstaller(
 	const meta = LIBRARIES[name];
 
 	const spinner = createSpinner(
-		`Menginstall ${name}@${version} ke ${resolvedPath} ...`
+		`Now installing ${name}@${version} into ${resolvedPath}...`
 	).start();
 
 	try {
@@ -29,16 +29,16 @@ export async function libraryInstaller(
 			stdio: 'inherit',
 		});
 		spinner.success({
-			text: `${name}@${version} berhasil diinstall di ${resolvedPath}`,
+			text: `${name}@${version} was installed successfully in ${resolvedPath}.`,
 		});
 	} catch (err) {
-		spinner.error({ text: `Gagal menginstall ${name}.` });
+		spinner.error({ text: `Failed to install ${name}.` });
 		console.error(err.message);
 	}
 
 	if (isTs && meta.types) {
 		const typesSpinner = createSpinner(
-			`Menginstall @types/${meta.types.name} ke ${resolvedPath} ...`
+			`Now installing @types/${meta.types.name} into ${resolvedPath}...`
 		).start();
 		try {
 			let tsVersion = await getClosestTypesVersion(meta.types.name, version);
@@ -50,11 +50,11 @@ export async function libraryInstaller(
 				stdio: 'inherit',
 			});
 			typesSpinner.success({
-				text: `@types/${meta.types.name} berhasil diinstall di ${resolvedPath}`,
+				text: `@types/${meta.types.name} was installed successfully in ${resolvedPath}.`,
 			});
 		} catch (err) {
 			typesSpinner.error({
-				text: `Gagal menginstall @types/${meta.types.name}.`,
+				text: `Failed to install @types/${meta.types.name}.`,
 			});
 			console.error(err.message);
 		}
@@ -62,7 +62,7 @@ export async function libraryInstaller(
 
 	if (meta.special) {
 		const specialSpinner = createSpinner(
-			`Menginstall ${meta.special.name}@${version} ke ${resolvedPath} ...`
+			`Now installing ${meta.special.name}@${version} into ${resolvedPath}...`
 		).start();
 		try {
 			const isDev = meta.special.dependencies === 'devDependencies';
@@ -72,25 +72,27 @@ export async function libraryInstaller(
 				stdio: 'inherit',
 			});
 			specialSpinner.success({
-				text: `${meta.special.name} berhasil diinstall di ${resolvedPath}`,
+				text: `${meta.special.name} was installed successfully in ${resolvedPath}.`,
 			});
 		} catch (err) {
-			specialSpinner.error({ text: `Gagal menginstall ${meta.special.name}.` });
+			specialSpinner.error({
+				text: `Failed to installd ${meta.special.name}.`,
+			});
 			console.error(err.message);
 		}
 	}
 
 	if (meta.npx && meta.init) {
 		const cmd = meta.npxCommand || `${name} init`;
-		const spinner = createSpinner(`Menjalankan: npx ${cmd} ...`).start();
+		const spinner = createSpinner(`Now running: npx ${cmd} ...`).start();
 		try {
 			execSync(`npx ${cmd}`, {
 				cwd: resolvedPath,
 				stdio: 'inherit',
 			});
-			spinner.success({ text: `Berhasil menjalankan: npx ${cmd}` });
+			spinner.success({ text: `Command executed successfully: npx ${cmd}` });
 		} catch (err) {
-			spinner.error({ text: `Gagal menjalankan: npx ${cmd}` });
+			spinner.error({ text: `Error running: npx ${cmd}` });
 			console.error(err.message);
 		}
 	}

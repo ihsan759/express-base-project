@@ -27,7 +27,7 @@ export async function installWithConfirmation(
 			await libraryInstaller(resolvedPath, false, name, isTs);
 		} else {
 			const confirm = await input({
-				message: `Apakah Anda ingin menginstall ${name}? (y/n)`,
+				message: `Would you like to install ${name}? (y/n)`,
 				default: 'y',
 			});
 			if (confirm.toLowerCase() === 'y') {

@@ -45,7 +45,7 @@ export async function generatePages(
 
 		if (!content) {
 			throw new Error(
-				`File ${contentPath} tidak memiliki export default. Pastikan Anda export default template string.`
+				`Missing default export in ${contentPath}. Ensure that you export a default template string.`
 			);
 		}
 		const skipExt = ['.env', '.gitignore'];

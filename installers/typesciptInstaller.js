@@ -10,7 +10,7 @@ export async function installTypescript(resolvedPath, CustomVersion = false) {
 		versionTypescript = await getAllVersions('typescript');
 
 		const confirm = await input({
-			message: `Apakah Anda ingin mengcustom versi ts-node? (y/n)`,
+			message: `Do you want to choose a specific version of ts-node? (y/n)`,
 			default: 'y',
 		});
 
@@ -20,7 +20,7 @@ export async function installTypescript(resolvedPath, CustomVersion = false) {
 	}
 
 	const spinner = createSpinner(
-		`Menginstall typescript@${versionTypescript} ke ${resolvedPath} ...`
+		`Now installing typescript@${versionTypescript} into ${resolvedPath}...`
 	).start();
 
 	try {
@@ -32,11 +32,11 @@ export async function installTypescript(resolvedPath, CustomVersion = false) {
 			}
 		);
 		spinner.success({
-			text: `typescript@${versionTypescript} berhasil diinstall di ${resolvedPath}`,
+			text: `typescript@${versionTypescript} was installed successfully in ${resolvedPath}.`,
 		});
 		return true;
 	} catch (err) {
-		spinner.error({ text: 'Gagal menginstall typescript.' });
+		spinner.error({ text: `Failed to install typescript.` });
 		console.error(err.message);
 		return false;
 	}
