@@ -1,5 +1,5 @@
 {
-	"name": "express-generator",
+	"name": "express-base-project",
 	"version": "1.0.0",
 	"type": "module",
 	"dependencies": {
@@ -10,20 +10,30 @@
 	"description": "Automatically generates a clean, ready-to-use Express base project",
 	"main": "install-express.js",
 	"devDependencies": {},
+	"bin": {
+		"install-express": "./install-express.js"
+	},
 	"scripts": {
-		"test": "npm install-express.js -t ./express"
+		"start": "node install-express.js"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/ihsan759/express-generator.git"
+		"url": "git+https://github.com/ihsan759/express-base-project.git"
 	},
 	"keywords": [
-		"express-generator"
+		"express",
+		"generator",
+		"typescript",
+		"prisma",
+		"javascript"
 	],
-	"author": "Muhamad Ichsan Dwi Farhana (https://www.linkedin.com/in/muhamad-ichsan-dwi-farhana-4a74291a3/)",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/ihsan759/express-generator/issues"
+	"author": {
+		"name": "Muhamad Ichsan Dwi Farhana",
+		"url": "https://www.linkedin.com/in/muhamad-ichsan-dwi-farhana-4a74291a3/"
 	},
-	"homepage": "https://github.com/ihsan759/express-generator#readme"
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/ihsan759/express-base-project/issues"
+	},
+	"homepage": "https://github.com/ihsan759/express-base-project#readme"
 }
