@@ -1,7 +1,7 @@
 // generators/pageGenerator.js
 import fs from 'fs';
 import path from 'path';
-import { pathToFileURL } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 
 /**
  * Mengenerate file page berdasarkan metadata.
@@ -39,7 +39,13 @@ export async function generatePages(
 			}
 		}
 
-		const fullContentPath = pathToFileURL(path.resolve(contentPath)).href;
+		const __filename = fileURLToPath(import.meta.url);
+		const __dirname = path.dirname(__filename);
+		const fullContentPath = pathToFileURL(
+			path.resolve(__dirname, '../', contentPath)
+		).href;
+		//console.log(fullContentPath);
+		//const fullContentPath = pathToFileURL(path.resolve(contentPath)).href;
 		const mod = await import(fullContentPath);
 		const content = mod.default;
 
