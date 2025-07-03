@@ -13,12 +13,7 @@ import { generatePages } from './generators/pageGenerator.js';
 import { PAGE } from './meta_datas/pageMetaData.js';
 
 const args = process.argv.slice(2);
-let targetDir = '.';
-
-// Ambil nama script dari path, misalnya: /project/install-express.js
-const scriptPath = process.argv[1]; // Misalnya: /project/install-express.js
-const scriptName = path.basename(scriptPath, path.extname(scriptPath)); // → install-express
-targetDir = path.resolve('.', scriptName);
+let targetDir = 'express';
 
 // Ambil argumen target folder
 args.forEach((arg, i) => {
