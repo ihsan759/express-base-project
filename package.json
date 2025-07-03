@@ -1,6 +1,6 @@
 {
 	"name": "express-base-project",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"type": "module",
 	"dependencies": {
 		"@inquirer/prompts": "^7.5.3",
