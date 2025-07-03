@@ -11,11 +11,17 @@ export default class GenericRepository<
 		this.model = model;
 	}
 
-	async getAll(select?: object) {
-		// handle error generic repository
+	// handle error generic repository
+	async getAll(options?: {
+		where?: TWhereInput;
+		select?: object;
+		include?: object;
+	}) {
 		// @ts-expect-error
 		return await this.model.findMany({
-			select: select || undefined,
+			where: options?.where,
+			select: options?.select,
+			include: options?.include,
 		});
 	}
 
@@ -30,12 +36,21 @@ export default class GenericRepository<
 		options?: {
 			select?: TSelect;
 			many?: boolean;
+			include?: object;
 		}
 	) {
-		const query = {
+		const query: any = {
 			where: { [key]: value } as any,
-			select: options?.select,
 		};
+
+		if (options?.select && options?.include) {
+			throw new Error(
+				"Cannot use both 'select' and 'include' at the same time in Prisma."
+			);
+		}
+
+		if (options?.select) query.select = options.select;
+		if (options?.include) query.include = options.include;
 
 		return options?.many
 			? // @ts-expect-error

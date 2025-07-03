@@ -1,75 +1,93 @@
 const Content = `
+/**
+ * @template TDelegate
+ * @template TWhereInput
+ * @template TCreateInput
+ * @template TUpdateInput
+ */
 export default class GenericRepository {
 	/**
-	 * @param {any} model - ORM delegate (ex: prisma.account)
+	 * @param {TDelegate} model - Prisma model delegate (e.g., db.account)
 	 */
 	constructor(model) {
+		/** @protected */
 		this.model = model;
 	}
 
 	/**
-	 * Mengambil semua data.
-	 * @param {object} [select]
-	 * @returns {Promise<any[]>}
+	 * @param {{ where?: TWhereInput, select?: object, include?: object }} [options]
+	 * @returns {Promise<any>}
 	 */
-	async getAll(select) {
+	async getAll(options) {
+		// @ts-expect-error
 		return await this.model.findMany({
-			select: select || undefined,
+			where: options?.where,
+			select: options?.select,
+			include: options?.include,
 		});
 	}
 
 	/**
-	 * Mengambil data berdasarkan ID.
 	 * @param {string} id
 	 * @returns {Promise<any>}
 	 */
 	async getById(id) {
+		// @ts-expect-error
 		return await this.model.findUnique({ where: { id } });
 	}
 
 	/**
-	 * Mengambil data berdasarkan key tertentu.
-	 * @param {string} key
-	 * @param {any} value
-	 * @param {{ select?: object, many?: boolean }} [options]
+	 * @template TSelect
+	 * @param {keyof TWhereInput} key
+	 * @param {TWhereInput[typeof key]} value
+	 * @param {{ select?: TSelect, many?: boolean, include?: object }} [options]
 	 * @returns {Promise<any>}
 	 */
-	async getByKey(key, value, options = {}) {
+	async getByKey(key, value, options) {
 		const query = {
 			where: { [key]: value },
-			select: options.select,
 		};
 
-		return options.many
+		if (options?.select && options?.include) {
+			throw new Error(
+				"Cannot use both 'select' and 'include' at the same time in Prisma."
+			);
+		}
+
+		if (options?.select) query.select = options.select;
+		if (options?.include) query.include = options.include;
+
+		// @ts-expect-error
+		return options?.many
 			? await this.model.findMany(query)
 			: await this.model.findFirst(query);
 	}
 
 	/**
-	 * Membuat data baru.
-	 * @param {object} data
+	 * @param {TCreateInput} data
 	 * @returns {Promise<any>}
 	 */
 	async create(data) {
+		// @ts-expect-error
 		return await this.model.create({ data });
 	}
 
 	/**
-	 * Mengupdate data berdasarkan ID.
 	 * @param {string} id
-	 * @param {object} data
+	 * @param {TUpdateInput} data
 	 * @returns {Promise<any>}
 	 */
 	async update(id, data) {
+		// @ts-expect-error
 		return await this.model.update({ where: { id }, data });
 	}
 
 	/**
-	 * Menghapus data berdasarkan ID.
 	 * @param {string} id
 	 * @returns {Promise<any>}
 	 */
 	async delete(id) {
+		// @ts-expect-error
 		return await this.model.delete({ where: { id } });
 	}
 }
